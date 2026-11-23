@@ -1,0 +1,109 @@
+
+import pandas as pd
+
+# =================================
+# DANE POCZATKOWE
+# =================================
+
+dane = {
+    "postac": [
+        "Rycerz A", "Rycerz B", "Rycerz C",
+        "Mag A", "Mag B", "Mag C",
+        "Lucznik A", "Lucznik B", "Lucznik C"
+    ],
+    "klasa": [
+        "Wojownik", "Wojownik", "Wojownik",
+        "Mag", "Mag", "Mag",
+        "Lucznik", "Lucznik", "Lucznik"
+    ],
+    "atak": [70, 75, 65, 95, 100, 90, 85, 82, 88],
+    "obrona": [90, 85, 95, 35, 30, 40, 50, 55, 45],
+    "wygrane": [6, 7, 5, 8, 7, 6, 7, 6, 8]
+}
+
+df = pd.DataFrame(dane)
+
+print("DANE POCZATKOWE:")
+print(df)
+
+
+# =================================
+# ZADANIE 1 - WYSWIETLANIE POSTACI
+# =================================
+
+print("\nZADANIE 1 - Nazwy wszystkich postaci:")
+print(df["postac"])
+
+
+# =================================
+# ZADANIE 2 - SREDNI ATAK
+# =================================
+
+print("\nZADANIE 2 - Sredni atak wszystkich postaci:")
+print(df["atak"].mean())
+
+
+# =================================
+# ZADANIE 3 - NAJWIECEJ WYGRANYCH
+# =================================
+
+print("\nZADANIE 3 - Najwieksza liczba wygranych:")
+print(df["wygrane"].max())
+
+
+# =================================
+# ZADANIE 4 - ZMIANA DANYCH
+# =================================
+
+print("\nZADANIE 4 - Zmiana ataku Rycerza A na 100:")
+
+df.loc[df["postac"] == "Rycerz A", "atak"] = 100
+
+print(df)
+
+print("Nowa srednia ataku:")
+print(df["atak"].mean())
+
+# Przywracamy poczatkowy atak Rycerza A
+df.loc[df["postac"] == "Rycerz A", "atak"] = 70
+
+
+# =================================
+# ZADANIE 5 - WYSZUKIWANIE POSTACI
+# =================================
+
+print("\nZADANIE 5 - Postacie z minimum 7 wygranymi:")
+print(df[df["wygrane"] >= 7])
+
+
+# =================================
+# ZADANIE 6 - SORTOWANIE POSTACI
+# =================================
+
+print("\nZADANIE 6 - Sortowanie wedlug ataku:")
+print(df.sort_values("atak", ascending=False))
+
+
+# =================================
+# ZADANIE 7 - GRUPOWANIE POSTACI
+# =================================
+
+print("\nZADANIE 7 - Sredni atak kazdej klasy:")
+print(df.groupby("klasa")["atak"].mean())
+
+
+# =================================
+# ZADANIE 8 - MODYFIKACJA DANYCH
+# =================================
+
+print("\nZADANIE 8 - Zmiana ataku Maga B ze 100 na 90:")
+
+df.loc[df["postac"] == "Mag B", "atak"] = 90
+
+print(df)
+
+print("\nNowy sredni atak klasy Mag:")
+print(df[df["klasa"] == "Mag"]["atak"].mean())
+
+
+print("\nKONIEC PROGRAMU")
